@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./App.css";
+import ParentComponent from "./components/ParentComponent";
+import Storage from "./components/Storage";
+import Timer from "./components/Timer";
+import Dashboard from "./components/Dashboard";
+import Profile from "./components/Profile";
+import withAuth from "./utils/withAuth";
 
 function App() {
+  const AuthenticatedDashboard = withAuth(Dashboard);
+  const AuthenticatedProfile = withAuth(Profile);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <h1>Creating Timer Component</h1>
+      <Timer /> */}
+      {/* <Storage /> */}
+      {/* <ParentComponent /> */}
+      <BrowserRouter>
+        <Routes>
+          <Route path="/dashboard" element={<AuthenticatedDashboard />} />
+          <Route path="/profile" element={<AuthenticatedProfile />} />
+          <Route path="/" element={<h1>Home Page</h1>} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
